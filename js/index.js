@@ -23,9 +23,9 @@ generarLibros().then(function tratarLibros(listado) {
             dash.appendChild(categories);
 
             h3.innerHTML = categoria.display_name;
-            p.innerHTML = categoria.oldest_published_date;
-            p2.innerHTML = categoria.newest_published_date;
-            p3.innerHTML = categoria.updated;
+            p.innerHTML = `Oldest: ${categoria.oldest_published_date}`;
+            p2.innerHTML = `Newest: ${categoria.newest_published_date}`;
+            p3.innerHTML = `Updated: ${categoria.updated}`;
             btn.innerHTML = "READ MORE!";
     });    
 });
