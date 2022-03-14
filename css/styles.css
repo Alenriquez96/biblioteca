@@ -13,6 +13,7 @@ header{
 }
 header>h2{
     font-family: 'UnifrakturMaguntia', cursive;
+    
 }
 #dashboard{
     display: flex;
@@ -35,6 +36,18 @@ button{
     margin: 8px;
 }
 
+.divLibros{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+.portadas{
+    width: 230px;
+    height: 370px;
+
+}
 
 /* //-----------Media queries-------------// */
 @media only screen and (min-width: 430px){
@@ -50,6 +63,19 @@ button{
         flex: 50%;
         width: 50%;
     }
+    #NuevoDash{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .divLibros{
+        flex: 50%;
+        width: 50%;
+    }
+    .portadas{
+        width: 185px;
+        height: 310px;
+    }
 }
 
 @media only screen and (min-width: 850px){
@@ -59,6 +85,15 @@ button{
         align-items: stretch;
     }
     #dashboard>div{
+        flex: 25%;
+        width: 25%;
+    }
+    #NuevoDash{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .divLibros{
         flex: 25%;
         width: 25%;
     }
