@@ -48,6 +48,14 @@ button{
     height: 370px;
 
 }
+#iniciarSesion{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+}
+#iniciarSesion>#logout{
+    display: none;
+}
 
 /* //-----------Media queries-------------// */
 @media only screen and (min-width: 430px){
