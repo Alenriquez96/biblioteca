@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=UnifrakturMaguntia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Brawler&family=Montserrat:wght@500&family=UnifrakturMaguntia&display=swap');
+
 *{
     box-sizing: border-box;
-    word-wrap: normal;
     flex-wrap: wrap;
 }
+body{
+    background-color: #E9ECEF;
+    font-family: "Brawler";
+
+}
+button,input{
+    cursor: pointer;
+}
+
 header{
     display: flex;
     flex-direction: column;
@@ -12,8 +22,15 @@ header{
     width: 100%;
 }
 header>h2{
-    font-family: 'UnifrakturMaguntia', cursive;
-    
+    font-family: 'UnifrakturMaguntia', cursive;   
+}
+header>h1{
+    font-family: 'UnifrakturMaguntia';
+    font-size: 70px;
+    letter-spacing: 3px;
+    text-decoration: underline 5px solid black;
+    text-align: center;
+    margin: 0;
 }
 #dashboard{
     display: flex;
@@ -51,11 +68,59 @@ button{
 #iniciarSesion{
     display: flex;
     flex-direction: column;
-    width: 15%;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+#iniciarSesion>#login{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3%;
+    width: 100px;
+    height: 73px;
+    word-wrap: break-word;
+
+}
+.logoGoogle{
+    height: 20px;
+    width: 20px;
+    margin: 2px 7px;
 }
 #iniciarSesion>#logout{
     display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 73px;
+    border-radius: 5%;
+    cursor: pointer;
+    word-wrap: break-word;
 }
+
+#loaders{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  #loader2{
+      display: none;
+  }
 
 /* //-----------Media queries-------------// */
 @media only screen and (min-width: 430px){
@@ -84,6 +149,20 @@ button{
         width: 185px;
         height: 310px;
     }
+    #iniciarSesion{
+        align-items: flex-start;
+    }
+    #iniciarSesion#login{
+        width: 100%;
+    }
+    #iniciarSesion#logout{
+        width: 100px;
+    }
+    .loader{
+        width: 70px;
+        height: 70px;
+    }
+
 }
 
 @media only screen and (min-width: 850px){
@@ -104,5 +183,12 @@ button{
     .divLibros{
         flex: 25%;
         width: 25%;
+    }    
+    #iniciarSesion{
+        align-items: flex-start;
+    }
+    .loader{
+        width: 100px;
+        height: 100px;
     }
 }

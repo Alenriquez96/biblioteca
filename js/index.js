@@ -62,7 +62,9 @@ buttonLogin.addEventListener("click", async (e)=>{
 async function generarLibros(){
     try{
         let f = await fetch(`https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=U5XodN0WD6AxEelHTmcyeksK5nC8On22`);
-        let listado = f.json();
+        let listado = await f.json();
+        const loader = document.getElementsByClassName("loader")[0];
+        loader.style.display="none";
         return listado
     }
     catch(error){
@@ -72,6 +74,7 @@ async function generarLibros(){
 generarLibros().then(function tratarLibros(listado) {
     let categorias = listado.results;
     console.log(categorias);
+
     
 
     categorias.forEach(function hola(categoria, index){
@@ -125,10 +128,12 @@ generarLibros().then(function tratarLibros(listado) {
 
 
             const botones = document.getElementsByClassName("botones");
-            botones[index].addEventListener("click",async function entrarLista(){
+            botones[index].addEventListener("click",
+            async function entrarLista(){
                 let f = await fetch(`https://api.nytimes.com/svc/books/v3/lists/${categoria.list_name_encoded}.json?api-key=U5XodN0WD6AxEelHTmcyeksK5nC8On22`);
                 let data = await f.json();
-                let results = data.results
+
+                let results = data.results;
                 console.log(results);
                 dash.remove();
                 window.scroll({
@@ -136,7 +141,7 @@ generarLibros().then(function tratarLibros(listado) {
                     left: 0,
                     behavior: 'smooth'
                   });
-
+                  
                 const cabecera = document.createElement("h2");
                 cabecera.innerHTML = categoria.display_name;
                 let btnAtras = document.createElement("div");
