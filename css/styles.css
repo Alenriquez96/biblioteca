@@ -13,6 +13,24 @@ body{
 button,input{
     cursor: pointer;
 }
+input{
+    margin: 4px 0;
+    border-radius: 7%;
+    font-weight: 600;
+}
+.heart{
+    border: 2px double grey;
+    height: 30px;
+    border-radius: 10px;
+}
+.heart:hover{
+    background-color: red;
+    color: #E9ECEF;
+    transform: scale(1.05);
+    transition: all 0.5s ease-out;
+
+
+}
 h3,p{
     text-align: center;
     margin-right: 3px;
@@ -72,9 +90,8 @@ button{
 }
 #iniciarSesion{
     display: flex;
-    flex-direction: column;
     height: 100px;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 #iniciarSesion>#login{
@@ -127,6 +144,39 @@ button{
       display: none;
   }
 
+  #perfil{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  #imgPerfil{
+      border-radius: 50%;
+  }
+
+  img{
+    transition: all 0.3s ease-out;
+
+  }
+  img:hover{
+    transform: scale(1.10);
+  }
+
+  .botones{
+    border: 2px double grey;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+
+  .divsCat{
+    border: 7px solid #333333;
+    border-radius: 4% / 4%;
+    text-transform: uppercase;
+    position: relative;
+  }
+    
+  
 /* //-----------Media queries-------------// */
 @media only screen and (min-width: 430px){
     header>h1{
