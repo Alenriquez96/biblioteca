@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header>
+        <h2>New York Times</h2>
+        <h1>Best Sellers</h1>   
+        <div id="perfil"></div>     
+    </header>
+
+    <section id="loaders">
+        <div class="loader"></div>
+        <div class="loader" id="loader2"></div>
+    </section>
+
+    <section id="iniciarSesion">
+        <Button id="login">
+            <img class="logoGoogle" src="./assets/google-logo--v1.png">
+            <p>Haz Login con Google!</p> 
+        </Button>
+        <button id="logout">
+            <img class="logoGoogle" src="./assets/google-logo--v1.png" alt="">
+            <p>Cerrar sesión</p>
+        </button>
+    </section>
+    <section id="dashboard">
+
+    </section>
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+<script src="./js/index.js"></script>
+</html>

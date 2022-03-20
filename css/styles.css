@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=UnifrakturMaguntia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Brawler&family=Montserrat:wght@500&family=UnifrakturMaguntia&display=swap');
+
+*{
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+body{
+    background-color: #E9ECEF;
+    font-family: "Brawler";
+
+}
+button,input{
+    cursor: pointer;
+}
+input{
+    margin: 4px 0;
+    border-radius: 7%;
+    font-weight: 600;
+}
+.heart{
+    border: 2px double grey;
+    height: 30px;
+    border-radius: 10px;
+}
+.heart:hover{
+    background-color: red;
+    color: #E9ECEF;
+    transform: scale(1.05);
+    transition: all 0.5s ease-out;
+
+
+}
+h3,p{
+    text-align: center;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+header>h2{
+    font-family: 'UnifrakturMaguntia', cursive;   
+}
+header>h1{
+    font-family: 'UnifrakturMaguntia';
+    font-size: 70px;
+    letter-spacing: 3px;
+    text-decoration: underline 5px solid black;
+    text-align: center;
+    margin: 0;
+}
+#dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#dashboard>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 90%;
+}
+#dashboard>div>h3{
+    text-align: center;
+}
+button{
+    margin: 8px;
+}
+
+.divLibros{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+.portadas{
+    width: 230px;
+    height: 370px;
+
+}
+#iniciarSesion{
+    display: flex;
+    height: 100px;
+    justify-content: space-around;
+    align-items: center;
+}
+#iniciarSesion>#login{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3%;
+    width: 100px;
+    height: 73px;
+    word-wrap: break-word;
+
+}
+.logoGoogle{
+    height: 20px;
+    width: 20px;
+    margin: 2px 7px;
+}
+#iniciarSesion>#logout{
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 73px;
+    border-radius: 5%;
+    cursor: pointer;
+    word-wrap: break-word;
+}
+
+#loaders{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  #loader2{
+      display: none;
+  }
+
+  #perfil{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  #imgPerfil{
+      border-radius: 50%;
+  }
+
+  img{
+    transition: all 0.3s ease-out;
+
+  }
+  img:hover{
+    transform: scale(1.10);
+  }
+
+  .botones{
+    border: 2px double grey;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+
+  .divsCat{
+    border: 7px solid #333333;
+    border-radius: 4% / 4%;
+    text-transform: uppercase;
+    position: relative;
+  }
+    
+  
+/* //-----------Media queries-------------// */
+@media only screen and (min-width: 430px){
+    header>h1{
+        align-items: flex-start;
+    }
+    #dashboard{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+    #dashboard>div{
+        flex: 50%;
+        width: 50%;
+    }
+    #NuevoDash{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .divLibros{
+        flex: 50%;
+        width: 50%;
+    }
+    .portadas{
+        width: 185px;
+        height: 310px;
+    }
+    #iniciarSesion{
+        align-items: flex-start;
+    }
+    #iniciarSesion#login{
+        width: 100%;
+    }
+    #iniciarSesion#logout{
+        width: 100px;
+    }
+    .loader{
+        width: 70px;
+        height: 70px;
+    }
+
+}
+
+@media only screen and (min-width: 850px){
+    #dashboard{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+    #dashboard>div{
+        flex: 25%;
+        width: 25%;
+    }
+    #NuevoDash{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .divLibros{
+        flex: 25%;
+        width: 25%;
+    }    
+    #iniciarSesion{
+        align-items: flex-start;
+    }
+    .loader{
+        width: 100px;
+        height: 100px;
+    }
+}
