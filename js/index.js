@@ -17,13 +17,33 @@ const createUser = (user) => {
 };
 //PASOS PARA QUE SALGA EL LOG CON GOOGLE
 let provider = new firebase.auth.GoogleAuthProvider();
+//coleccion users
+const ref = db.collection('users').doc();
 
 firebase.auth().languageCode = 'es';
 
 async function login (){
     try{
         const response = await firebase.auth().signInWithPopup(provider);
-        console.log(response);
+        if (response.user) {
+            document.getElementById("logout").style.display= "flex";
+            document.getElementById("login").style.display= "none";
+
+            //////-----------------PERFIL----------------------------//
+            const perfil = document.getElementById("perfil");
+            const profpic = document.createElement("img");
+            const nombre = document.createElement("p");
+            nombre.innerHTML = `Bienvenid@ ${response.additionalUserInfo.profile.given_name}`
+            profpic.src = response.additionalUserInfo.profile.picture;
+            profpic.id = "imgPerfil"
+            perfil.append(profpic,nombre)
+
+            ref.set({
+                nombre:response.additionalUserInfo.profile.given_name,
+                email: response.additionalUserInfo.profile.email,
+                id:  ref.id
+               })
+            }
         return response.user;
     }catch(error){
         throw new Error(error);
@@ -37,28 +57,12 @@ const buttonLogin = document.getElementById("login");
 buttonLogin.addEventListener("click", async (e)=>{
     try{
         await login();
-        document.getElementById("logout").style.display= "flex";
-        document.getElementById("login").style.display= "none";
     } catch(error) {}
 });
 
 
-//DESLOGUEARSE
-// const signOut = () => {
-//     let user = firebase.auth().currentUser;
-//     firebase.auth().signOut().then(() => {
-//         console.log("Sale del sistema: "+user.email)
-//         document.getElementById("login").style.display= "flex";
-//         document.getElementById("logout").style.display= "none";
-//       }).catch((error) => {
-//         console.log("hubo un error: "+error);
-//       });
-//   }
-//   document.getElementById("logout").addEventListener("click", signOut);
 
-
-
-//--------------------FUNCIONALIDAD DE LA página----------------------//
+//--------------------FUNCIONALIDAD DE LA PÁGINA----------------------//
 async function generarLibros(){
     try{
         let f = await fetch(`https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=U5XodN0WD6AxEelHTmcyeksK5nC8On22`);
@@ -71,13 +75,14 @@ async function generarLibros(){
         console.error(error);
     }
 }
+
+//LLamamos a la función
 generarLibros().then(function tratarLibros(listado) {
     let categorias = listado.results;
-    console.log(categorias);
 
     
-
-    categorias.forEach(function hola(categoria, index){
+    //foreach para cada categoría 
+    categorias.forEach(function (categoria, index){
             let h3 = document.createElement("h3");
             let p = document.createElement("p");
             let p2 = document.createElement("p");
@@ -102,23 +107,39 @@ generarLibros().then(function tratarLibros(listado) {
         //------------------------------------------------------------------------------//
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
+                    console.log(user);
                     const btnCorazon = document.createElement("button");
                     categories.append(btnCorazon);
-                    btnCorazon.id="heart";
+                    btnCorazon.classList="heart";
+                    btnCorazon.innerHTML ="Añadir a favoritos";
                     console.log(`Está en el sistema:${user.email} ${user.uid}`);
-                } 
-            });
+                    document.getElementById("logout").style.display="flex";
 
+                    document.getElementsByClassName("heart")[index].addEventListener("click",favoritos);
+                    function favoritos() {
+                        const refFav = db.collection("favoritos").doc();
+
+                        refFav.set({
+                            id: ref.id,
+                            favoritos: categoria.display_name
+                        })
+                    } 
+                } 
+                else{
+                    console.log("Nadie en el sistema");
+                }
+            });
+            
            //--------------------------- DESLOGUEARSE----------------------------------------------////
            //
            //------------------------------------------------------------------------------------//
             const signOut = () => {
                     let user = firebase.auth().currentUser;
                     firebase.auth().signOut().then(() => {
-                        // console.log("Sale del sistema: "+user.email)
                         document.getElementById("login").style.display= "flex";
                         document.getElementById("logout").style.display= "none";
-                        document.getElementById("heart").remove()
+                        document.getElementsByClassName("heart")[index].style.display="none";
+                        document.getElementById("perfil").remove()
                       }).catch((error) => {
                         console.log("hubo un error: "+error);
                       });
@@ -126,15 +147,15 @@ generarLibros().then(function tratarLibros(listado) {
             document.getElementById("logout").addEventListener("click", signOut);
 
 
-
+            //Hacemos un evento para que los botones muestren la categoria y los libros
             const botones = document.getElementsByClassName("botones");
             botones[index].addEventListener("click",
             async function entrarLista(){
                 let f = await fetch(`https://api.nytimes.com/svc/books/v3/lists/${categoria.list_name_encoded}.json?api-key=U5XodN0WD6AxEelHTmcyeksK5nC8On22`);
                 let data = await f.json();
 
+
                 let results = data.results;
-                console.log(results);
                 dash.remove();
                 window.scroll({
                     top: 0,
@@ -155,9 +176,17 @@ generarLibros().then(function tratarLibros(listado) {
 
 
                 const libros = results.books;
-                console.log(libros);
 
-                libros.forEach(function(info){
+
+
+                libros.forEach(function(info,index2){
+
+                    document.getElementById("logout").addEventListener("click", signOut);
+                    
+
+
+
+                    
                     let divLibro = document.createElement("div");
                     divLibro.classList = "divLibros"
                     NuevoDash.appendChild(divLibro)
@@ -179,6 +208,29 @@ generarLibros().then(function tratarLibros(listado) {
                     <form action="${info.amazon_product_url}">
                         <input type="submit" value="Buy it at Amazon!"/>
                     </form>`;
+
+
+                    //Crea un boton de favoritos
+                    firebase.auth().onAuthStateChanged(function(user) {
+                        if (user) {
+
+                            const btnCorazon = document.createElement("button");
+                            divLibro.append(btnCorazon);
+                            btnCorazon.classList="heart";
+                            btnCorazon.innerHTML = "Añadir a favoritos"
+                            document.getElementsByClassName("heart")[index2].addEventListener("click",favoritos);
+                            function favoritos() {
+                                const refFavBook = db.collection("LibrosFav").doc();
+                                refFavBook.set({
+                                    id: ref.id,
+                                    LibrosFav: info.title
+                                })
+                            } 
+                        } 
+                        else{
+                            console.log("Nadie en el sistema");
+                        }
+                    });
                 })
             });
     });     
