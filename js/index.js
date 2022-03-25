@@ -1,5 +1,8 @@
+const env = require("dotenv").config('../.env');
+const apikey = process.env.apikey;
+
 const firebaseConfig = {
-    apiKey: "AIzaSyD25sJNhyBH17BxqJbLHbLryF0Je8b5rpM",
+    apiKey: apikey,
     authDomain: "biblioteca-f4692.firebaseapp.com",
     projectId: "biblioteca-f4692",
     storageBucket: "biblioteca-f4692.appspot.com",
